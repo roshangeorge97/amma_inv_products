@@ -1,21 +1,33 @@
 import React, { useState } from 'react';
 import Header from "@/app/(components)/Header";
 
-const UpdateStockModal = ({ 
+// Define the props interface
+interface UpdateStockModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  product: {
+    productId: string;
+    name: string;
+    stockQuantity: number;
+  } | null;
+  onUpdate: (data: { productId: string; stockQuantity: number }) => void;
+}
+
+const UpdateStockModal: React.FC<UpdateStockModalProps> = ({ 
   isOpen, 
   onClose, 
   product, 
   onUpdate 
 }) => {
-  const [stockQuantity, setStockQuantity] = useState(product?.stockQuantity || 0);
+  const [stockQuantity, setStockQuantity] = useState<number>(product?.stockQuantity || 0);
 
   if (!isOpen || !product) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onUpdate({
       productId: product.productId,
-      stockQuantity: parseInt(stockQuantity)
+      stockQuantity: parseInt(stockQuantity.toString(), 10)
     });
     onClose();
   };
@@ -31,7 +43,7 @@ const UpdateStockModal = ({
           <input
             type="number"
             value={stockQuantity}
-            onChange={(e) => setStockQuantity(e.target.value)}
+            onChange={(e) => setStockQuantity(Number(e.target.value))}
             className="block w-full mt-2 p-2 border-gray-500 border-2 rounded-md"
             min="0"
             required
