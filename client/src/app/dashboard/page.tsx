@@ -6,7 +6,6 @@ import {
   BookOpen, Camera, Sandwich
 } from "lucide-react";
 import CardPopularProducts from "./CardPopularProducts";
-import CardPurchaseSummary from "./CardPurchaseSummary";
 import CardSalesSummary from "./CardSalesSummary";
 import StatCard from "./StatCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,10 +19,10 @@ const categoryIcons = {
   LIFE_PRODUCTS: Sandwich,
   STATIONARY: Box,
   PHOTOGRAPHY: Camera,
-  PUBLICATIONS: BookOpen,
+  PUBLICATIONS: BookOpen, 
 };
 
-const getPrice = (product) => {
+const getPrice = (product: { LifeProduct: { price: any; }[]; StationaryProduct: { price: any; }[]; Publication: { price: any; }[]; }) => {
   if (product.LifeProduct?.[0]) return `Rs.${product.LifeProduct[0].price}`;
   if (product.StationaryProduct?.[0]) return `Rs.${product.StationaryProduct[0].price}`;
   if (product.Publication?.[0]) return `Rs.${product.Publication[0].price}`;
@@ -48,18 +47,18 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 auto-rows-min">
             <div className="lg:col-span-1">
               <CardPopularProducts 
-                products={metrics?.popularProducts || []} 
-                getPrice={getPrice}
-                className="h-full border-[#B10F56]/20 hover:border-[#B10F56]/50 transition-colors"
+                // products={metrics?.popularProducts || []} 
+                // getPrice={getPrice}
+                // className="h-full border-[#B10F56]/20 hover:border-[#B10F56]/50 transition-colors"
               />
             </div>
             <div className="lg:col-span-1 space-y-4">
               <CardSalesSummary 
-                data={metrics?.salesSummary || []}
-                className="h-full border-[#B10F56]/20 hover:border-[#B10F56]/50 transition-colors" 
+                // data={metrics?.salesSummary || []}
+                // className="h-full border-[#B10F56]/20 hover:border-[#B10F56]/50 transition-colors" 
               />
             </div>
-          </div>
+          </div> 
         </TabsContent>
 
         {Object.entries(categoryIcons).map(([category, Icon]) => (
@@ -67,17 +66,17 @@ const Dashboard = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 auto-rows-min">
               <div className="lg:col-span-1">
                 <CardPopularProducts 
-                  products={metrics?.popularProducts?.find(p => p.category === category)?.products || []}
-                  category={category}
-                  getPrice={getPrice}
-                  className="h-full border-[#B10F56]/20 hover:border-[#B10F56]/50 transition-colors"
+                  // products={metrics?.popularProducts?.find(p => p.category === category)?.products || []}
+                  // category={category}
+                  // getPrice={getPrice}
+                  // className="h-full border-[#B10F56]/20 hover:border-[#B10F56]/50 transition-colors"
                 />
               </div>
               <div className="lg:col-span-1 space-y-4">
                 <CardSalesSummary 
-                  data={metrics?.salesSummary || []}
-                  category={category}
-                  className="h-full border-[#B10F56]/20 hover:border-[#B10F56]/50 transition-colors"
+                  // data={metrics?.salesSummary || []}
+                  // category={category}
+                  // className="h-full border-[#B10F56]/20 hover:border-[#B10F56]/50 transition-colors"
                 />
               </div>
             </div>

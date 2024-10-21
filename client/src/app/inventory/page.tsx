@@ -4,7 +4,7 @@ import { useGetProductsQuery } from "@/state/api";
 import Header from "@/app/(components)/Header";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
-const getPrice = (product) => {
+const getPrice = (product: { LifeProduct: { price: any; }[]; StationaryProduct: { price: any; }[]; Publication: { price: any; }[]; }) => {
   if (product.LifeProduct?.[0]) {
     return `Rs.${product.LifeProduct[0].price}`;
   } else if (product.StationaryProduct?.[0]) {

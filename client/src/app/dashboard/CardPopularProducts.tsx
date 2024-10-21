@@ -11,7 +11,9 @@ const categoryIcons = {
   PUBLICATIONS: BookOpen,
 };
 
-const formatPrice = (product) => {
+const formatPrice = (product: { LifeProduct: { price: any; }[]; StationaryProduct: { price: any; }[]; PhotographyService: {
+  singleSidePrice: any; doubleSidePrice: any; 
+}[]; Publication: { price: any; }[]; }) => {
   if (product.LifeProduct?.[0]) {
     return `₹${product.LifeProduct[0].price}`;
   } else if (product.StationaryProduct?.[0]) {
@@ -29,14 +31,14 @@ const ProductCard = ({ product }: { product: any }) => (
     <div className="flex items-center gap-3">
       <Image
         src="/logo.png"
-        alt={product.name}
+        alt={product.name || "Product Image"}
         width={48}
         height={48}
         className="rounded-lg w-14 h-14"
       />
       <div className="flex flex-col justify-between gap-1">
         <div className="font-bold text-[#B10F56]">
-          {product.name}
+          {product.name || "Unnamed Product"}
         </div>
         <div className="flex text-sm items-center">
           <span className="font-bold text-[#B10F56] text-xs">
@@ -52,10 +54,11 @@ const ProductCard = ({ product }: { product: any }) => (
       <button className="p-2 rounded-full bg-[#B10F56]/10 text-[#B10F56] mr-2 hover:bg-[#B10F56]/20 transition-colors">
         {getCategoryIcon(product.category)}
       </button>
-      {Math.round(product.stockQuantity / 1000)}k Sold
+      {product.stockQuantity ? `${Math.round(product.stockQuantity / 1000)}k Sold` : "Out of Stock"}
     </div>
   </div>
 );
+
 
 const getCategoryIcon = (category: string) => {
   const IconComponent = categoryIcons[category as keyof typeof categoryIcons];
@@ -101,7 +104,7 @@ const CardPopularProducts = () => {
 
           <TabsContent value="ALL">
             <div className="overflow-auto h-full">
-              {productsByCategory.flatMap(cat => cat.products).map((product) => (
+              {productsByCategory.flatMap(cat => cat.products).map((product: any) => (
                 <ProductCard key={product.productId} product={product} />
               ))}
             </div>
@@ -111,7 +114,7 @@ const CardPopularProducts = () => {
             <TabsContent key={category} value={category}>
               <div className="overflow-auto h-full">
                 {productsByCategory
-                  .find(cat => cat.category === category)?.products.map((product) => (
+                  .find(cat => cat.category === category)?.products.map((product: any) => (
                     <ProductCard key={product.productId} product={product} />
                   )) || (
                     <div className="text-center text-[#B10F56]/60 py-4">

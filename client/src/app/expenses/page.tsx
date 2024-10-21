@@ -27,7 +27,9 @@ const CATEGORY_COLORS = {
 };
 
 const TransactionsPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("ALL");
+  type Category = "ALL" | "LIFE_PRODUCTS" | "STATIONARY" | "PHOTOGRAPHY" | "PUBLICATIONS";
+  
+  const [selectedCategory, setSelectedCategory] = useState<Category>("ALL");
   const [startDate, setStartDate] = useState("2024-03-01");
   const [endDate, setEndDate] = useState("2024-03-06");
   const [viewType, setViewType] = useState<"pie" | "bar">("pie");
@@ -61,8 +63,10 @@ const TransactionsPage = () => {
       // Group by products within the selected category
       const productTotals = transactions.reduce((acc: Record<string, number>, transaction) => {
         const productId = transaction.productId;
-        if (!acc[productId]) acc[productId] = 0;
-        acc[productId] += transaction.amount;
+        if (productId) {
+          if (!acc[productId]) acc[productId] = 0;
+          acc[productId] += transaction.amount;
+        }
         return acc;
       }, {});
 
@@ -99,7 +103,7 @@ const TransactionsPage = () => {
 
   return (
     <div style={{ backgroundColor: "#F5F5F5", color: "#B10F56", padding: "20px", fontFamily: "'Roboto', sans-serif" }}>
-      <Header title="Transactions Dashboard" />
+      <Header name="" title="Transactions Dashboard" />
 
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
         {/* Input Controls */}
@@ -126,7 +130,7 @@ const TransactionsPage = () => {
             <label style={{ display: "block", marginBottom: "5px" }}>Category:</label>
             <select
               value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
+              onChange={(e) => setSelectedCategory(e.target.value as Category)}
               style={{ padding: "10px", border: "1px solid #B10F56", borderRadius: "5px", width: "100%" }}
             >
               <option value="ALL">All Categories</option>
@@ -140,7 +144,7 @@ const TransactionsPage = () => {
             <label style={{ display: "block", marginBottom: "5px" }}>View Type:</label>
             <select
               value={viewType}
-              onChange={(e) => setViewType(e.target.value)}
+              onChange={(e) => setViewType(e.target.value as "pie" | "bar")}
               style={{ padding: "10px", border: "1px solid #B10F56", borderRadius: "5px", width: "100%" }}
             >
               <option value="pie">Pie Chart</option>

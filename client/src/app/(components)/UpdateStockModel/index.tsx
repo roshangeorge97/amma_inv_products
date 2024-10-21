@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Header from "@/app/(components)/Header";
 
-// Define the props interface
 interface UpdateStockModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -10,7 +9,7 @@ interface UpdateStockModalProps {
     name: string;
     stockQuantity: number;
   } | null;
-  onUpdate: (data: { productId: string; stockQuantity: number }) => void;
+  onUpdate: (update: { productId: string; stockQuantity: number }) => void;
 }
 
 const UpdateStockModal: React.FC<UpdateStockModalProps> = ({ 
@@ -19,15 +18,15 @@ const UpdateStockModal: React.FC<UpdateStockModalProps> = ({
   product, 
   onUpdate 
 }) => {
-  const [stockQuantity, setStockQuantity] = useState<number>(product?.stockQuantity || 0);
+  const [stockQuantity, setStockQuantity] = useState(product?.stockQuantity || 0);
 
   if (!isOpen || !product) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     onUpdate({
       productId: product.productId,
-      stockQuantity: parseInt(stockQuantity.toString(), 10)
+      stockQuantity: parseInt(stockQuantity.toString())
     });
     onClose();
   };

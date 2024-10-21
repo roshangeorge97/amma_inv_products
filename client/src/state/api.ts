@@ -1,6 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface Product {
+  Publication: any;
+  PhotographyService: any;
+  StationaryProduct: any;
+  LifeProduct: any;
   productId: string;
   name: string;
   price: number;
@@ -119,6 +123,12 @@ export interface TransactionQueryParams {
   type?: 'INCOME' | 'EXPENSE';
 }
 
+export interface ExpenseQueryParams {
+  startDate?: string;
+  endDate?: string;
+  category?: string;
+}
+
 export interface TransactionSummary {
   summaryId: string;
   totalIncome: number;
@@ -136,7 +146,7 @@ export interface TransactionSummary {
 export interface TransactionQueryParams {
   startDate?: string;
   endDate?: string;
-  category?: string;
+  category?: 'LIFE_PRODUCTS' | 'STATIONARY' | 'PHOTOGRAPHY' | 'PUBLICATIONS';
   type?: 'INCOME' | 'EXPENSE';
 }
 
@@ -195,14 +205,14 @@ export const api = createApi({
     getExpensesByCategory: build.query<ExpenseByCategorySummary[], ExpenseQueryParams | void>({
       query: (params) => ({
         url: "/expenses",
-        params: params,
+        params: params || {},
       }),
       providesTags: ["Expenses"],
     }),
     getTransactions: build.query<Transaction[], TransactionQueryParams | void>({
       query: (params) => ({
         url: "/transactions",
-        params: params,
+        params: params || undefined,
       }),
       providesTags: ["Transactions"],
     }),
@@ -210,7 +220,7 @@ export const api = createApi({
     getTransactionSummary: build.query<TransactionSummary, TransactionQueryParams | void>({
       query: (params) => ({
         url: "/transactions/summary",
-        params: params,
+        params: params || undefined,
       }),
       providesTags: ["Transactions"],
     }),

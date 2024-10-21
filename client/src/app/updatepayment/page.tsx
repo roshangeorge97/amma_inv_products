@@ -81,15 +81,20 @@ const UpdatePaymentPage = () => {
     try {
       const product = products.find(p => p.productId === selectedProduct);
   
-      const paymentPayload = {
+      const paymentPayload: {
+        productId: string;
+        quantity: number;
+        totalAmount: number;
+        // isSingleSided?: boolean;
+      } = {
         productId: selectedProduct,
         quantity,
         totalAmount,
       };
   
-      if (product?.PhotographyService?.[0]) {
-        paymentPayload.isSingleSided = isSingleSided;
-      }
+      // if (product?.PhotographyService?.[0]) {
+      //   paymentPayload.isSingleSided = isSingleSided;
+      // }
   
       const result = await updatePayment(paymentPayload).unwrap();
   
