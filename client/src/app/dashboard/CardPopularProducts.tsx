@@ -1,4 +1,4 @@
-import { useGetDashboardMetricsQuery, useGetCategoryMetricsQuery } from "@/state/api";
+import { useGetDashboardMetricsQuery, useGetCategoryMetricsQuery, DashboardProduct } from "@/state/api";
 import { ShoppingBag, BookOpen, Box, Sandwich } from "lucide-react";
 import React from "react";
 import Rating from "../(components)/Rating";
@@ -65,24 +65,24 @@ const getCategoryIcon = (category: string) => {
   return IconComponent ? <IconComponent className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />;
 };
 
-const CardPopularProducts = () => {
-  const { data: dashboardMetrics, isLoading } = useGetDashboardMetricsQuery();
-  const { data: categoryMetrics, isLoading: loadingCategory } = useGetCategoryMetricsQuery("ALL");
+interface CardPopularProductsProps {
+  products: DashboardProduct[];
+  category: string;
+  getPrice: (product: {
+    LifeProduct: { price: any }[];
+    StationaryProduct: { price: any }[];
+    Publication: { price: any }[];
+    PhotographyService?: { singleSidePrice: any; doubleSidePrice: any }[];
+  }) => string;
+  className: string;
+}
 
-  if (isLoading || loadingCategory) {
-    return (
-      <div className="row-span-3 xl:row-span-6 bg-white shadow-md rounded-2xl">
-        <div className="m-5 text-[#B10F56]">Loading...</div>
-      </div>
-    );
-  }
 
-  const productsByCategory = dashboardMetrics?.popularProducts || [];
-
+const CardPopularProducts: React.FC<CardPopularProductsProps> = ({ products, category, getPrice, className }) => {
   return (
-    <div className="row-span-3 xl:row-span-6 bg-white shadow-md rounded-2xl pb-16 border border-[#B10F56]/20">
+    <div className={`row-span-3 xl:row-span-6 bg-white shadow-md rounded-2xl pb-16 border border-[#B10F56]/20 ${className}`}>
       <div className="px-7 pt-5 pb-2">
-        <h3 className="text-lg font-semibold mb-4 text-[#B10F56]">Popular Products</h3>
+        <h3 className="text-lg font-semibold mb-4 text-[#B10F56]">Popular Products - {category}</h3>
         <Tabs defaultValue="ALL" className="w-full">
           <TabsList className="mb-4 bg-[#B10F56]/10">
             <TabsTrigger 
@@ -91,30 +91,31 @@ const CardPopularProducts = () => {
             >
               All
             </TabsTrigger>
-            {Object.keys(categoryIcons).map((category) => (
+            {Object.keys(categoryIcons).map((cat) => (
               <TabsTrigger 
-                key={category} 
-                value={category}
+                key={cat} 
+                value={cat}
                 className="data-[state=active]:bg-[#B10F56] data-[state=active]:text-white text-[#B10F56]"
               >
-                {category.replace('_', ' ')}
+                {cat.replace('_', ' ')}
               </TabsTrigger>
             ))}
           </TabsList>
 
           <TabsContent value="ALL">
             <div className="overflow-auto h-full">
-              {productsByCategory.flatMap(cat => cat.products).map((product: any) => (
+              {products.map((product) => (
                 <ProductCard key={product.productId} product={product} />
               ))}
             </div>
           </TabsContent>
 
-          {Object.keys(categoryIcons).map((category) => (
-            <TabsContent key={category} value={category}>
+          {Object.keys(categoryIcons).map((cat) => (
+            <TabsContent key={cat} value={cat}>
               <div className="overflow-auto h-full">
-                {productsByCategory
-                  .find(cat => cat.category === category)?.products.map((product: any) => (
+                {products
+                  .filter(product => product.category === cat)
+                  .map((product) => (
                     <ProductCard key={product.productId} product={product} />
                   )) || (
                     <div className="text-center text-[#B10F56]/60 py-4">

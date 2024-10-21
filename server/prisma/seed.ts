@@ -16,7 +16,7 @@ async function deleteAllData() {
   await prisma.salesSummary.deleteMany({});
   await prisma.purchaseSummary.deleteMany({});
   await prisma.transaction.deleteMany({});
-  await prisma.users.deleteMany({});
+  // await prisma.users.deleteMany({});
   
   console.log('All data cleared');
 }
@@ -88,10 +88,10 @@ async function main() {
   // Order matters! Products must be created before sales/purchases/transactions
   const seedingOrder = [
     { file: "products.json", handler: createProduct },
-    { 
-      file: "users.json", 
-      handler: async (data: any) => await prisma.users.create({ data }) 
-    },
+    // { 
+    //   file: "users.json", 
+    //   handler: async (data: any) => await prisma.users.create({ data }) 
+    // },
     { 
       file: "sales.json", 
       handler: async (data: any) => await prisma.sales.create({ data: {
