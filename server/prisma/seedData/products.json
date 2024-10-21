@@ -1,0 +1,43 @@
+[
+  {
+    "productId": "LIFE001",
+    "name": "Hand Soap",
+    "category": "LIFE_PRODUCTS",
+    "stockQuantity": 100,
+    "rating": 4.5,
+    "price": 2.99,
+    "type": "soap",
+    "manufacturer": "Clean Co",
+    "expiryDate": "2025-12-31"
+  },
+  {
+    "productId": "STAT001",
+    "name": "Notebook",
+    "category": "STATIONARY",
+    "stockQuantity": 50,
+    "rating": 4.0,
+    "price": 1.99,
+    "type": "notebook"
+  },
+  {
+    "productId": "PHOTO001",
+    "name": "Color Print Service",
+    "category": "PHOTOGRAPHY",
+    "stockQuantity": 1000,
+    "rating": 4.8,
+    "serviceType": "photo print",
+    "singleSidePrice": 3.0,
+    "doubleSidePrice": 5.0
+  },
+  {
+    "productId": "PUB001",
+    "name": "Introduction to Programming",
+    "category": "PUBLICATIONS",
+    "stockQuantity": 25,
+    "rating": 4.7,
+    "price": 29.99,
+    "author": "John Smith",
+    "publisher": "Tech Books Inc",
+    "isbn": "978-0-123456-78-9"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "purchaseSummaryId": "PS_001",
+    "totalPurchased": 925.0,
+    "changePercentage": 3.5,
+    "date": "2024-10-18T00:00:00.000Z",
+    "categoryBreakdown": {
+      "LIFE_PRODUCTS": 125.0,
+      "STATIONARY": 800.0,
+      "PHOTOGRAPHY": 0,
+      "PUBLICATIONS": 0
+    }
+  }
+]

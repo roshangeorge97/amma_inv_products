@@ -1,0 +1,14 @@
+[
+  {
+    "salesSummaryId": "SS_001",
+    "totalValue": 1250.50,
+    "changePercentage": 5.2,
+    "date": "2024-10-19T00:00:00.000Z",
+    "categoryBreakdown": {
+      "LIFE_PRODUCTS": 450.25,
+      "STATIONARY": 350.75,
+      "PHOTOGRAPHY": 250.50,
+      "PUBLICATIONS": 199.00
+    }
+  }
+]

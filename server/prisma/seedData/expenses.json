@@ -1,0 +1,14 @@
+[
+  {
+    "expenseId": "EXP_001",
+    "category": "Inventory",
+    "amount": 925.0,
+    "timestamp": "2024-10-18T09:00:00.000Z"
+  },
+  {
+    "expenseId": "EXP_002",
+    "category": "Sales",
+    "amount": 24.98,
+    "timestamp": "2024-10-19T11:15:00.000Z"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "saleId": "SALE_001",
+    "productId": "LIFE001",
+    "timestamp": "2024-10-19T10:30:00.000Z",
+    "quantity": 2,
+    "unitPrice": 4.99,
+    "totalAmount": 9.98,
+    "isSingleSided": null
+  },
+  {
+    "saleId": "SALE_002",
+    "productId": "PHOTO001",
+    "timestamp": "2024-10-19T11:15:00.000Z",
+    "quantity": 5,
+    "unitPrice": 3.0,
+    "totalAmount": 15.0,
+    "isSingleSided": true
+  }
+]

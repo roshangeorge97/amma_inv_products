@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  hashedPassword String
+  name           String
+  session        Session?
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  adminId      String   @unique
+  token        String   @unique
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  lastUsedAt   DateTime @updatedAt
+  admin        Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+}
+
+model BaseProduct {
+  productId           String               @id
+  name               String
+  category           ProductCategory
+  stockQuantity      Int
+  rating             Float?
+  Sales              Sales[]
+  Purchases          Purchases[]
+  LifeProduct        LifeProduct[]
+  StationaryProduct  StationaryProduct[]
+  PhotographyService PhotographyService[]
+  Publication        Publication[]
+  transactions       Transaction[]
+}
+
+enum ProductCategory {
+  LIFE_PRODUCTS
+  STATIONARY
+  PHOTOGRAPHY
+  PUBLICATIONS
+}
+
+model LifeProduct {
+  productId     String      @id
+  baseProduct   BaseProduct @relation(fields: [productId], references: [productId])
+  price         Float
+  type          String
+  manufacturer  String?
+  expiryDate    DateTime?
+}
+
+model StationaryProduct {
+  productId   String      @id
+  baseProduct BaseProduct @relation(fields: [productId], references: [productId])
+  price       Float
+  type        String
+}
+
+model PhotographyService {
+  productId       String      @id
+  baseProduct     BaseProduct @relation(fields: [productId], references: [productId])
+  singleSidePrice Float       @default(3.0)
+  doubleSidePrice Float       @default(2.0)
+  serviceType     String
+}
+
+model Publication {
+  productId   String      @id
+  baseProduct BaseProduct @relation(fields: [productId], references: [productId])
+  price       Float
+  author      String?
+  publisher   String?
+  isbn        String?
+}
+
+model Sales {
+  saleId        String      @id
+  productId     String
+  timestamp     DateTime
+  quantity      Int
+  unitPrice     Float
+  totalAmount   Float
+  isSingleSided Boolean?
+  product       BaseProduct @relation(fields: [productId], references: [productId])
+}
+
+model Purchases {
+  purchaseId  String      @id
+  productId   String
+  timestamp   DateTime
+  quantity    Int
+  unitCost    Float
+  totalCost   Float
+  product     BaseProduct @relation(fields: [productId], references: [productId])
+}
+
+model SalesSummary {
+  salesSummaryId    String   @id
+  totalValue        Float
+  changePercentage  Float?
+  date              DateTime
+  categoryBreakdown Json?
+}
+
+model PurchaseSummary {
+  purchaseSummaryId  String   @id
+  totalPurchased     Float
+  changePercentage   Float?
+  date              DateTime
+  categoryBreakdown  Json?
+}
+
+model Transaction {
+  transactionId    String          @id
+  productId        String?
+  product          BaseProduct?    @relation(fields: [productId], references: [productId])
+  productCategory  ProductCategory?
+  amount           Float
+  quantity         Int
+  description      String?
+  timestamp        DateTime
+  type             TransactionType
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+model TransactionSummary {
+  summaryId         String   @id
+  totalIncome       Float
+  totalExpense      Float
+  netAmount         Float
+  date              DateTime
+  categoryBreakdown Json?
+}

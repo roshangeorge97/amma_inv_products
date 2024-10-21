@@ -1,0 +1,18 @@
+[
+  {
+    "purchaseId": "PUR_001",
+    "productId": "LIFE001",
+    "timestamp": "2024-10-18T09:00:00.000Z",
+    "quantity": 50,
+    "unitCost": 2.50,
+    "totalCost": 125.0
+  },
+  {
+    "purchaseId": "PUR_002",
+    "productId": "STAT001",
+    "timestamp": "2024-10-18T09:30:00.000Z",
+    "quantity": 100,
+    "unitCost": 8.00,
+    "totalCost": 800.0
+  }
+]

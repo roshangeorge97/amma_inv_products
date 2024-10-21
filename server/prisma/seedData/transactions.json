@@ -1,0 +1,62 @@
+[
+    {
+      "transactionId": "T001",
+      "productId": "LIFE001",
+      "productCategory": "LIFE_PRODUCTS",
+      "amount": 299.00,
+      "quantity": 100,
+      "description": "Bulk purchase of Hand Soap",
+      "timestamp": "2024-03-01T10:00:00Z",
+      "type": "EXPENSE"
+    },
+    {
+      "transactionId": "T002",
+      "productId": "STAT001",
+      "productCategory": "STATIONARY",
+      "amount": 99.50,
+      "quantity": 50,
+      "description": "Notebook stock purchase",
+      "timestamp": "2024-03-02T11:30:00Z",
+      "type": "EXPENSE"
+    },
+    {
+      "transactionId": "T003",
+      "productId": "PHOTO001",
+      "productCategory": "PHOTOGRAPHY",
+      "amount": 45.00,
+      "quantity": 15,
+      "description": "Photo printing service income",
+      "timestamp": "2024-03-03T14:15:00Z",
+      "type": "INCOME"
+    },
+    {
+      "transactionId": "T004",
+      "productId": "PUB001",
+      "productCategory": "PUBLICATIONS",
+      "amount": 749.75,
+      "quantity": 25,
+      "description": "Programming book stock purchase",
+      "timestamp": "2024-03-04T09:45:00Z",
+      "type": "EXPENSE"
+    },
+    {
+      "transactionId": "T005",
+      "productId": "LIFE001",
+      "productCategory": "LIFE_PRODUCTS",
+      "amount": 59.80,
+      "quantity": 20,
+      "description": "Hand Soap retail sales",
+      "timestamp": "2024-03-05T16:20:00Z",
+      "type": "INCOME"
+    },
+    {
+      "transactionId": "T006",
+      "productId": "PUB001",
+      "productCategory": "PUBLICATIONS",
+      "amount": 149.95,
+      "quantity": 5,
+      "description": "Programming book sales",
+      "timestamp": "2024-03-06T13:10:00Z",
+      "type": "INCOME"
+    }
+  ]

@@ -1,0 +1,31 @@
+[
+    {
+      "summaryId": "TS001",
+      "totalIncome": 254.75,
+      "totalExpense": 1148.25,
+      "netAmount": -893.50,
+      "date": "2024-03-06T23:59:59Z",
+      "categoryBreakdown": {
+        "LIFE_PRODUCTS": {
+          "income": 59.80,
+          "expense": 299.00,
+          "net": -239.20
+        },
+        "STATIONARY": {
+          "income": 0,
+          "expense": 99.50,
+          "net": -99.50
+        },
+        "PHOTOGRAPHY": {
+          "income": 45.00,
+          "expense": 0,
+          "net": 45.00
+        },
+        "PUBLICATIONS": {
+          "income": 149.95,
+          "expense": 749.75,
+          "net": -599.80
+        }
+      }
+    }
+  ]
